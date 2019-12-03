@@ -22,7 +22,8 @@ export class SectionLogin extends Component {
     this.state = {
       username: '',
       password: '',
-      modal: false
+      modal: false,
+      messageSuccess: ''
     }
   }
   render() {
@@ -37,23 +38,35 @@ export class SectionLogin extends Component {
       }
     }
     
-    const toggleModal = () => {
+    const handleToggleModal = () => {
       this.setState({
         modal: !this.state.modal
       })
     };
 
-    let recoveryPassword = (e) => {
+    let handleRecoveryPassword = (e) => {
       e.preventDefault();
     }
 
-    let sendLogin = (e) => {
+    let handleSetMessageSuccess = (msg) => {
+      this.setState({
+        messageSuccess: msg
+      })
+    }
+    let handleSendLogin = (e) => {
       e.preventDefault();
       const { username, password } = this.state;
-      if (username != "" && password != "") {
+      if (username && password ) {
         if (username == "vinicius" && password == "123") {
-          toggleModal();
+          handleToggleModal();
+          handleSetMessageSuccess(`Usuário e senha autenticados com sucesso!`);
+        }else{
+          handleToggleModal();
+          handleSetMessageSuccess(`Usuário ou senha inválidos!`);
         }
+      }else{
+        handleToggleModal();
+        handleSetMessageSuccess(`Preencha usuário e senha para prosseguir!`);
       }
     }
     return (
@@ -71,12 +84,12 @@ export class SectionLogin extends Component {
           <Container>
             <Row>
               <Col className="mx-auto" lg="4" md="6">
-                <Modal isOpen={this.state.modal} toggle={toggleModal}>
+                <Modal isOpen={this.state.modal} toggle={handleToggleModal}>
                   <div style={{ alignSelf: 'center' }} className="modal-body">
-                    Usuário e senha autenticados com sucesso!
+                    {this.state.messageSuccess}
                 </div>
                   <div className="modal-footer">
-                    <Button className="btn-link" color="danger" type="button" onClick={toggleModal}>
+                    <Button className="btn-link" color="danger" type="button" onClick={handleToggleModal}>
                       OK
                     </Button>
                   </div>
@@ -84,7 +97,7 @@ export class SectionLogin extends Component {
                 <Card className="card-register">
                   <h3 className="title mx-auto">Login</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados usados in-game.</h5>
-                  <Form className="register-form">
+                  <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
                     <label>Username</label>
                     <InputGroup className="form-group-no-border">
                       <InputGroupAddon addonType="prepend">
@@ -108,7 +121,7 @@ export class SectionLogin extends Component {
                       className="btn-round"
                       color="danger"
                       type="button"
-                      onClick={e => sendLogin(e)}
+                      onClick={e => handleSendLogin(e)}
                     >
                       Login
                   </Button>
@@ -118,7 +131,7 @@ export class SectionLogin extends Component {
                       className="btn-link"
                       color="danger"
                       href="#"
-                      onClick={e => recoveryPassword(e)}
+                      onClick={e => handleRecoveryPassword(e)}
                     >
                       Esqueceu sua senha?
                   </Button>

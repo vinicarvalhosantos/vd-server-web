@@ -8,7 +8,7 @@ import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 // pages
 import Index from "views/index.js";
-import IndexDoc from "views/Index.js";
+import IndexDoc from "views/IndexEx.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import LoginPage from "views/pages/LoginPage.js";
 // others
