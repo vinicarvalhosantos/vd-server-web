@@ -1,12 +1,10 @@
 import React from "react";
 import classnames from "classnames";
 import {
-  Button,
   Collapse,
   NavbarBrand,
   Navbar,
   NavItem,
-  Modal,
   NavLink,
   Nav,
   Container
@@ -49,8 +47,8 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/index"
-            target="_blank"
-            title="Coded by Creative Tim"
+            target=""
+            title="VDServer WebSite"
           >
             VDServer
           </NavbarBrand>
@@ -72,55 +70,18 @@ function IndexNavbar() {
           isOpen={navbarCollapse}
         >
           <Nav navbar>
-            <NavItem>
+          <NavItem>
               <NavLink
-                data-placement="bottom"
-                href="https://twitter.com/CreativeTim?ref=creativetim"
-                target="_blank"
-                title="Follow us on Twitter"
+                href="#"
+                title="Entrar na loja do servidor"
               >
-                <i className="fa fa-twitter" />
-                <p className="d-lg-none">Twitter</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href="https://www.facebook.com/CreativeTim?ref=creativetim"
-                target="_blank"
-                title="Like us on Facebook"
-              >
-                <i className="fa fa-facebook-square" />
-                <p className="d-lg-none">Facebook</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
-                target="_blank"
-                title="Follow us on Instagram"
-              >
-                <i className="fa fa-instagram" />
-                <p className="d-lg-none">Instagram</p>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                data-placement="bottom"
-                href="https://www.github.com/CreativeTimOfficial/paper-kit-react?ref=creativetim"
-                target="_blank"
-                title="Star on GitHub"
-              >
-                <i className="fa fa-github" />
-                <p className="d-lg-none">GitHub</p>
+                <i className="fa fa-shopping-basket" /> Loja
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 href="/login-page"
-                target="_blank"
-                title="Follow us on Instagram"
+                title="Logar no site"
               >
                 <i className="fa fa-user-circle" /> Login
               </NavLink>
