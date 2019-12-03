@@ -1,31 +1,12 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-// nodejs library that concatenates strings
 import classnames from "classnames";
-// reactstrap components
 import {
   Button,
   Collapse,
   NavbarBrand,
   Navbar,
   NavItem,
+  Modal,
   NavLink,
   Nav,
   Container
@@ -71,7 +52,7 @@ function IndexNavbar() {
             target="_blank"
             title="Coded by Creative Tim"
           >
-            Paper Kit React
+            VDServer
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
@@ -137,10 +118,11 @@ function IndexNavbar() {
             </NavItem>
             <NavItem>
               <NavLink
-                href="https://demos.creative-tim.com/paper-kit-react/#/documentation?ref=pkr-index-navbar"
+                href="/login-page"
                 target="_blank"
+                title="Follow us on Instagram"
               >
-                <i className="nc-icon nc-book-bookmark" /> Documentation
+                <i className="fa fa-user-circle" /> Login
               </NavLink>
             </NavItem>
           </Nav>

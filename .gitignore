@@ -1,3 +1,4 @@
 node_modules/*
 ISSUE_TEMPLATE.*
 LICENSE.*
+package-lock.json

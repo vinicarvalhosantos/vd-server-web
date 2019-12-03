@@ -1,24 +1,4 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -32,9 +12,33 @@ import {
   Col
 } from "reactstrap";
 
-// core components
-
 function SectionLogin() {
+  
+
+  const [username = "", setUsername] = React.useState(false);//USUARIO
+  const [password = "", setPassword] = React.useState(false);//SENHA
+
+  let setPasswordValue = password =>{
+    setPassword(password);
+  }
+
+  let setUsernameValue = username =>{
+    setUsername(username);
+  }
+
+  const userLogin = (event) =>{
+    try {
+      event.preventDefault()
+      if(username == "ViniiCarvalhoo" && password == "91625724"){
+        alert("Funcionou!");
+      }else{
+        alert("Funcionou!");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div
@@ -47,42 +51,17 @@ function SectionLogin() {
           <Row>
             <Col className="mx-auto" lg="4" md="6">
               <Card className="card-register">
-                <h3 className="title mx-auto">Welcome</h3>
-                <div className="social-line text-center">
-                  <Button
-                    className="btn-neutral btn-just-icon mt-0"
-                    color="facebook"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className="fa fa-facebook-square" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon mt-0 ml-1"
-                    color="google"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className="fa fa-google-plus" />
-                  </Button>
-                  <Button
-                    className="btn-neutral btn-just-icon mt-0 ml-1"
-                    color="twitter"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className="fa fa-twitter" />
-                  </Button>
-                </div>
+                <h3 className="title mx-auto">Login</h3>
+                <h5 className="subtitle mx-auto">Obs: Seu login e senha são os mesmos que você usa in-game.</h5>
                 <Form className="register-form">
-                  <label>Email</label>
+                  <label>Username</label>
                   <InputGroup className="form-group-no-border">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="nc-icon nc-email-85" />
+                        <i className="fa fa-user-circle"/>
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" />
+                    <Input placeholder="Username" type="text" onChange={value => {setUsernameValue(value)}} />
                   </InputGroup>
                   <label>Password</label>
                   <InputGroup className="form-group-no-border">
@@ -91,7 +70,7 @@ function SectionLogin() {
                         <i className="nc-icon nc-key-25" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" />
+                    <Input placeholder="Password" type="password" onChange={value => {setPasswordValue(value)}} />
                   </InputGroup>
                   <Button
                     block
@@ -99,7 +78,7 @@ function SectionLogin() {
                     color="danger"
                     type="button"
                   >
-                    Register
+                    Logar
                   </Button>
                 </Form>
                 <div className="forgot">
@@ -107,24 +86,12 @@ function SectionLogin() {
                     className="btn-link"
                     color="danger"
                     href="#pablo"
-                    onClick={e => e.preventDefault()}
+                    onClick={e => userLogin(e)}
                   >
-                    Forgot password?
+                    Esqueceu sua senha?
                   </Button>
                 </div>
               </Card>
-              <div className="col text-center">
-                <Button
-                  className="btn-round"
-                  outline
-                  color="neutral"
-                  href="/register-page"
-                  size="lg"
-                  target="_blank"
-                >
-                  View Register Page
-                </Button>
-              </div>
             </Col>
           </Row>
         </Container>
