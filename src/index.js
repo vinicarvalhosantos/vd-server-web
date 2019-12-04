@@ -8,8 +8,6 @@ import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 // pages
 import Index from "views/index.js";
-import IndexDoc from "views/IndexEx.js";
-import ProfilePage from "views/examples/ProfilePage.js";
 import LoginPage from "views/pages/LoginPage.js";
 // others
 
@@ -17,14 +15,6 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/index" render={props => <Index {...props} />} />
-      <Route
-        path="/profile-page"
-        render={props => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/indexDoc-page"
-        render={props => <IndexDoc {...props} />}
-      />
       <Route
         path="/login-page"
         render={props => <LoginPage {...props} />}

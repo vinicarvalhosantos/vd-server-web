@@ -1,44 +1,9 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
-// reactstrap components
-
-// core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
-
-// index sections
-import SectionButtons from "views/index-sections-ex/SectionButtons.js";
-import SectionNavbars from "views/index-sections-ex/SectionNavbars.js";
-import SectionNavigation from "views/index-sections-ex/SectionNavigation.js";
-import SectionProgress from "views/index-sections-ex/SectionProgress.js";
-import SectionNotifications from "views/index-sections-ex/SectionNotifications.js";
-import SectionTypography from "views/index-sections-ex/SectionTypography.js";
-import SectionJavaScript from "views/index-sections-ex/SectionJavaScript.js";
-import SectionCarousel from "views/index-sections-ex/SectionCarousel.js";
-import SectionNucleoIcons from "views/index-sections-ex/SectionNucleoIcons.js";
-import SectionDark from "views/index-sections-ex/SectionDark.js";
-import SectionLogin from "views/index-sections-ex/SectionLogin.js";
-import SectionExamples from "views/index-sections-ex/SectionExamples.js";
-import SectionDownload from "views/index-sections-ex/SectionDownload.js";
+import CarouselSection from "views/index-sections/CarouselSection.js"
 
 function Index() {
   document.documentElement.classList.remove("nav-open");
@@ -53,19 +18,7 @@ function Index() {
       <IndexNavbar />
       <IndexHeader />
       <div className="main">
-        <SectionButtons />
-        <SectionNavbars />
-        <SectionNavigation />
-        <SectionProgress />
-        <SectionNotifications />
-        <SectionTypography />
-        <SectionJavaScript />
-        <SectionCarousel />
-        <SectionNucleoIcons />
-        <SectionDark />
-        <SectionLogin />
-        <SectionExamples />
-        <SectionDownload />
+        <CarouselSection />
         <DemoFooter />
       </div>
     </>
