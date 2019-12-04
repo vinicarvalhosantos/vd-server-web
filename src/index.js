@@ -7,8 +7,8 @@ import "assets/css/bootstrap.min.css";
 import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 // pages
-import Index from "views/index.js";
-import LoginPage from "views/pages/LoginPage.js";
+import Index from "views/pages/index/IndexPage.js";
+import LoginPage from "views/pages/login/LoginPage.js";
 // others
 
 ReactDOM.render(

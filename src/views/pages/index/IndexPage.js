@@ -2,8 +2,8 @@ import React from "react";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import IndexHeader from "components/Headers/IndexHeader.js";
-import DemoFooter from "components/Footers/DemoFooter.js";
-import CarouselSection from "views/index-sections/CarouselSection.js"
+import Footer from "components/Footers/Footer.js";
+import CarouselSection from "views/sections/index/CarouselSection.js"
 
 function Index() {
   document.documentElement.classList.remove("nav-open");
@@ -19,7 +19,7 @@ function Index() {
       <IndexHeader />
       <div className="main">
         <CarouselSection />
-        <DemoFooter />
+        <Footer />
       </div>
     </>
   );

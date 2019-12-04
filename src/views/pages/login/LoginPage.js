@@ -1,7 +1,7 @@
 import React from "react";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import LoginSection from "views/login-sections/LoginSection.js"
+import LoginSection from "views/sections/login/LoginSection.js"
 
 function Login() {
   document.documentElement.classList.remove("nav-open");
