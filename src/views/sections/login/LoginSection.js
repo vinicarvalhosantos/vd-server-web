@@ -94,7 +94,7 @@ export class SectionLogin extends Component {
                     </Button>
                   </div>
                 </Modal>
-                <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper4.jpg")})` }}>
+                <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper.jpg")})` }}>
                   <h3 className="title mx-auto">Login</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados usados in-game.</h5>
                   <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
