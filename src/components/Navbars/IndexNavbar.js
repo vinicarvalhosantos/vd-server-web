@@ -80,7 +80,7 @@ function IndexNavbar() {
             </NavItem>
             <NavItem>
               <NavLink
-                href="/login-page"
+                href="/login"
                 title="Logar no site"
               >
                 <i className="fa fa-user-circle" /> Login
