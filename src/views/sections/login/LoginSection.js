@@ -98,23 +98,23 @@ export class SectionLogin extends Component {
                   <h3 className="title mx-auto">Login</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados usados in-game.</h5>
                   <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
-                    <label>Username</label>
+                    <label>Usuário</label>
                     <InputGroup className="form-group-no-border">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="fa fa-user-circle" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input onChange={e => handleChange(e)} placeholder="Username" type="text" name="username" />
+                      <Input onChange={e => handleChange(e)} placeholder="Usuário" type="text" name="username" />
                     </InputGroup>
-                    <label>Password</label>
+                    <label>Senha</label>
                     <InputGroup className="form-group-no-border">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="nc-icon nc-key-25" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input onChange={e => handleChange(e)} placeholder="Password" type="password" name="password" />
+                      <Input onChange={e => handleChange(e)} placeholder="Senha" type="password" name="password" />
                     </InputGroup>
                     <Button
                       block
