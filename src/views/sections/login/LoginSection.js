@@ -94,7 +94,7 @@ export class SectionLogin extends Component {
                     </Button>
                   </div>
                 </Modal>
-                <Card className="card-register">
+                <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper4.jpg")})` }}>
                   <h3 className="title mx-auto">Login</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados usados in-game.</h5>
                   <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
@@ -119,7 +119,7 @@ export class SectionLogin extends Component {
                     <Button
                       block
                       className="btn-round"
-                      color="danger"
+                      color="success"
                       type="button"
                       onClick={e => handleSendLogin(e)}
                     >
@@ -129,7 +129,7 @@ export class SectionLogin extends Component {
                   <div className="forgot">
                     <Button
                       className="btn-link"
-                      color="danger"
+                      color="success"
                       href="#"
                       onClick={e => handleRecoveryPassword(e)}
                     >
