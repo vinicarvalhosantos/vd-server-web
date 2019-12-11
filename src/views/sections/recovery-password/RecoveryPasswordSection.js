@@ -2,6 +2,8 @@ import React from "react";
 
 import { Component } from "react";
 
+import Utils from "utils/Utils.js";
+
 import {
   Button,
   Card,
@@ -21,7 +23,7 @@ export class SectionLogin extends Component {
     super()
     this.state = {
       username: '',
-      password: '',
+      email: '',
       modal: false,
       messageSuccess: ''
     }
@@ -37,7 +39,7 @@ export class SectionLogin extends Component {
         console.log(error);
       }
     }
-    
+
     const handleToggleModal = () => {
       this.setState({
         modal: !this.state.modal
@@ -49,21 +51,27 @@ export class SectionLogin extends Component {
         messageSuccess: msg
       })
     }
-    let handleSendLogin = (e) => {
+    let handleSendRecovery = (e) => {
       e.preventDefault();
-      const { username, password } = this.state;
-      if (username && password ) {
-        if (username == "vinicius" && password == "123") {
+      const { username, email } = this.state;
+      if (username && email) {
+        if (Utils.validateEmail(email)) {
+          if (username == "vinicius" && email == "vini.csantos@hotmail.com") {
+            handleToggleModal();
+            handleSetMessageSuccess(`Um pedido para alterar a sua senha foi enviado ao seu email! Por favor siga as instruções corretamente para que não haja problemas!`);
+          } else {
+            handleToggleModal();
+            handleSetMessageSuccess(`Email ou usuário inválido!`);
+          }
+        } else {
           handleToggleModal();
-          handleSetMessageSuccess(`Usuário e senha autenticados com sucesso!`);
-        }else{
-          handleToggleModal();
-          handleSetMessageSuccess(`Usuário ou senha inválidos!`);
+          handleSetMessageSuccess(`Você precisa inserir um Email válido!`);
         }
-      }else{
+      } else {
         handleToggleModal();
         handleSetMessageSuccess(`Preencha usuário e senha para prosseguir!`);
       }
+
     }
     return (
       <>
@@ -83,7 +91,7 @@ export class SectionLogin extends Component {
                 <Modal isOpen={this.state.modal} toggle={handleToggleModal}>
                   <div style={{ alignSelf: 'center' }} className="modal-body">
                     {this.state.messageSuccess}
-                </div>
+                  </div>
                   <div className="modal-footer">
                     <Button className="btn-link" color="danger" type="button" onClick={handleToggleModal}>
                       OK
@@ -91,9 +99,18 @@ export class SectionLogin extends Component {
                   </div>
                 </Modal>
                 <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper.jpg")})` }}>
-                  <h3 className="title mx-auto">Login</h3>
+                  <h3 className="title mx-auto">Recuperar Senha</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
-                  <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
+                  <Form className="register-form" onKeyPress={e => { if (e.key === "Enter") handleSendRecovery(e) }}>
+                    <label>Email</label>
+                    <InputGroup className="form-group-no-border">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="fa fa-envelope" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input onChange={e => handleChange(e)} placeholder="Email" type="email" name="email" />
+                    </InputGroup>
                     <label>Usuário</label>
                     <InputGroup className="form-group-no-border">
                       <InputGroupAddon addonType="prepend">
@@ -103,34 +120,16 @@ export class SectionLogin extends Component {
                       </InputGroupAddon>
                       <Input onChange={e => handleChange(e)} placeholder="Usuário" type="text" name="username" />
                     </InputGroup>
-                    <label>Senha</label>
-                    <InputGroup className="form-group-no-border">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="nc-icon nc-key-25" />
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input onChange={e => handleChange(e)} placeholder="Senha" type="password" name="password" />
-                    </InputGroup>
                     <Button
                       block
                       className="btn-round"
                       color="success"
                       type="button"
-                      onClick={e => handleSendLogin(e)}
+                      onClick={e => handleSendRecovery(e)}
                     >
-                      Login
+                      Enviar
                   </Button>
                   </Form>
-                  <div className="forgot">
-                    <Button
-                      className="btn-link"
-                      color="success"
-                      href="/recoverypassword"
-                    >
-                      Esqueceu sua senha?
-                  </Button>
-                  </div>
                 </Card>
               </Col>
             </Row>
