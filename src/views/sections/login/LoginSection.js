@@ -2,6 +2,8 @@ import React from "react";
 
 import { Component } from "react";
 
+import axios from "axios";
+
 import {
   Button,
   Card,
@@ -37,11 +39,13 @@ export class SectionLogin extends Component {
         console.log(error);
       }
     }
-    
+
     const handleToggleModal = () => {
       this.setState({
         modal: !this.state.modal
       })
+      if (window.sessionStorage.getItem("username"))
+        window.location.href = "/index"
     };
 
     let handleSetMessageSuccess = (msg) => {
@@ -49,18 +53,30 @@ export class SectionLogin extends Component {
         messageSuccess: msg
       })
     }
-    let handleSendLogin = (e) => {
+    let handleSendLogin = async (e) => {
       e.preventDefault();
       const { username, password } = this.state;
-      if (username && password ) {
-        if (username == "vinicius" && password == "123") {
-          handleToggleModal();
-          handleSetMessageSuccess(`Usuário e senha autenticados com sucesso!`);
-        }else{
-          handleToggleModal();
-          handleSetMessageSuccess(`Usuário ou senha inválidos!`);
-        }
-      }else{
+      if (username && password) {
+        await axios.post("http://0.0.0.0:8000/userAuthenticate", { username: username, password: password }, { validateStatus: false })
+          .then(response => {
+            if (response.status == 200) {
+              const { username, email, userId } = response.data.records[0];
+              handleToggleModal();
+              handleSetMessageSuccess(`Usuário e senha autenticados com sucesso.`);
+              window.sessionStorage.setItem("userId", userId);
+              window.sessionStorage.setItem("username", username);
+              window.sessionStorage.setItem("email", email);
+            } else {
+              handleToggleModal();
+              handleSetMessageSuccess(`Usuário ou senha inválido. Tente novamente`);
+            }
+          })
+          .catch(error => {
+            console.log(error);
+            handleToggleModal();
+            handleSetMessageSuccess(`Houve um erro ao tentar realizar uma requisição na API. Por favor entre em contato com um administrador para que o problema seja resolvido!`);
+          })
+      } else {
         handleToggleModal();
         handleSetMessageSuccess(`Preencha usuário e senha para prosseguir!`);
       }
@@ -83,9 +99,9 @@ export class SectionLogin extends Component {
                 <Modal isOpen={this.state.modal} toggle={handleToggleModal}>
                   <div style={{ alignSelf: 'center' }} className="modal-body">
                     {this.state.messageSuccess}
-                </div>
+                  </div>
                   <div className="modal-footer">
-                    <Button className="btn-link" color="danger" type="button" onClick={handleToggleModal}>
+                    <Button className="btn-link" color="success" type="button" onClick={handleToggleModal}>
                       OK
                     </Button>
                   </div>
@@ -93,7 +109,7 @@ export class SectionLogin extends Component {
                 <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper.jpg")})` }}>
                   <h3 className="title mx-auto">Login</h3>
                   <h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
-                  <Form className="register-form" onKeyPress={e =>{ if(e.key === "Enter") handleSendLogin(e) }}>
+                  <Form className="register-form" onKeyPress={e => { if (e.key === "Enter") handleSendLogin(e) }}>
                     <label>Usuário</label>
                     <InputGroup className="form-group-no-border">
                       <InputGroupAddon addonType="prepend">
