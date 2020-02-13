@@ -15,14 +15,18 @@ import RecoveryPasswordPage from "views/pages/recovery-password/RecoveryPassword
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route 
-        path="/index" 
-        render={props => <Index {...props} />} 
-      />
       <Route
-        path="/login"
-        render={props => <LoginPage {...props} />}
+        path="/index"
+        render={props => <Index {...props} />}
       />
+      {!window.sessionStorage.getItem("username") ?
+        <Route
+          path="/login"
+          render={props => <LoginPage {...props} />}
+        />
+        :
+        <Redirect to="/index" />
+      }
       <Route
         path="/recoverypassword"
         render={props => <RecoveryPasswordPage {...props} />}
