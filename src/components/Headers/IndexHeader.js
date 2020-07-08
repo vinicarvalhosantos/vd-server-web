@@ -32,7 +32,7 @@ function IndexHeader() {
           }}
         />
         <h6 className="category category-absolute">
-          Edited by ViniiCarvalhoo & VivisBR
+          Edited by Vinicius "Vivi" Santos
         </h6>
       </div>
     </>

@@ -4,6 +4,8 @@ import { Component } from "react";
 
 import Utils from "utils/Utils.js";
 
+import axios from "axios";
+
 import {
   Button,
   Card,
@@ -56,20 +58,25 @@ export class SectionLogin extends Component {
       const { username, email } = this.state;
       if (username && email) {
         if (Utils.validateEmail(email)) {
-          if (username == "vinicius" && email == "vini.csantos@hotmail.com") {
+          axios.post(`${process.env.REACT_APP_BASE_URL}/v1/users/recoveryPassword`, { username: username, userEmail: email }).then(response => {
             handleToggleModal();
-            handleSetMessageSuccess(`Um pedido para alterar a sua senha foi enviado ao seu email! Por favor siga as instruções corretamente para que não haja problemas!`);
-          } else {
+            handleSetMessageSuccess(`As informações para a alteração de senha foram enviadas ao seu email! Siga os passos para que não haja nenhum problema.`);
+          }).catch(error => {
             handleToggleModal();
-            handleSetMessageSuccess(`Email ou usuário inválido!`);
-          }
+            if (error.response.status) {
+              const data = JSON.parse(JSON.stringify(error.response.data));
+              handleSetMessageSuccess(data.errors[0].userMessage);
+            } else {
+              handleSetMessageSuccess(`Houve um erro ao tentar realizar uma requisição na API. Por favor entre em contato com um administrador para que o problema seja resolvido!`);
+            }
+          })
         } else {
           handleToggleModal();
-          handleSetMessageSuccess(`Você precisa inserir um Email válido!`);
+          handleSetMessageSuccess(`Você precisa inserir um email válido!`);
         }
       } else {
         handleToggleModal();
-        handleSetMessageSuccess(`Preencha usuário e senha para prosseguir!`);
+        handleSetMessageSuccess(`Preencha usuário e email para prosseguir!`);
       }
 
     }
@@ -100,7 +107,8 @@ export class SectionLogin extends Component {
                 </Modal>
                 <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper.jpg")})` }}>
                   <h3 className="title mx-auto">Recuperar Senha</h3>
-                  <h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
+                  {//<h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
+                  }
                   <Form className="register-form" onKeyPress={e => { if (e.key === "Enter") handleSendRecovery(e) }}>
                     <label>Email</label>
                     <InputGroup className="form-group-no-border">

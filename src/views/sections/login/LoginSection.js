@@ -57,24 +57,23 @@ export class SectionLogin extends Component {
       e.preventDefault();
       const { username, password } = this.state;
       if (username && password) {
-        await axios.post("http://0.0.0.0:8000/userAuthenticate", { username: username, password: password }, { validateStatus: false })
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/users/userAuthenticate`, { username: username, password: password })
           .then(response => {
-            if (response.status == 200) {
-              const { username, email, userId } = response.data.records[0];
-              handleToggleModal();
-              handleSetMessageSuccess(`Usuário e senha autenticados com sucesso.`);
-              window.sessionStorage.setItem("userId", userId);
-              window.sessionStorage.setItem("username", username);
-              window.sessionStorage.setItem("email", email);
-            } else {
-              handleToggleModal();
-              handleSetMessageSuccess(`Usuário ou senha inválido. Tente novamente`);
-            }
+            const { username, userEmail, userUniqueId } = response.data.records[0];
+            handleToggleModal();
+            handleSetMessageSuccess(`Usuário e senha autenticados com sucesso.`);
+            window.sessionStorage.setItem("userUniqueId", userUniqueId);
+            window.sessionStorage.setItem("username", username);
+            window.sessionStorage.setItem("userEmail", userEmail);
           })
           .catch(error => {
-            console.log(error);
             handleToggleModal();
-            handleSetMessageSuccess(`Houve um erro ao tentar realizar uma requisição na API. Por favor entre em contato com um administrador para que o problema seja resolvido!`);
+            if (error.response.status) {
+              const data = JSON.parse(JSON.stringify(error.response.data));
+              handleSetMessageSuccess(data.errors[0].userMessage);
+            } else {
+              handleSetMessageSuccess(`Houve um erro ao tentar realizar uma requisição na API. Por favor entre em contato com um administrador para que o problema seja resolvido!`);
+            }
           })
       } else {
         handleToggleModal();
@@ -108,7 +107,8 @@ export class SectionLogin extends Component {
                 </Modal>
                 <Card className="card-register" style={{ backgroundImage: `url(${require("assets/img/login-wallpaper.jpg")})` }}>
                   <h3 className="title mx-auto">Login</h3>
-                  <h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
+                  {//<h5 className="subtitle mx-auto">Você deve usar os mesmos dados utilizados in-game.</h5>
+                  }
                   <Form className="register-form" onKeyPress={e => { if (e.key === "Enter") handleSendLogin(e) }}>
                     <label>Usuário</label>
                     <InputGroup className="form-group-no-border">
